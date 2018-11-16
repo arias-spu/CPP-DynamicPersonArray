@@ -8,15 +8,25 @@ using std::istream;
 using std::ostream;
 using std::stringstream;
 
+using std::cout;
+using std::endl;
+
+void DebugLine(const char* message){
+	cout << "- - - - - - - - - - " << message << endl;
+}
+
 Person::Person(const string& name, size_t age): _age(age){
+	DebugLine("Person::Person(const string& name, size_t age)");
 	_name = new char[name.length() + 1];
 	strcpy(_name, name.c_str());
 }
 Person::Person(const Person& other): _age(other._age){
+	DebugLine("Person::Person(const Person& other)");
 	_name = new char[strlen(other._name) + 1];
 	strcpy(_name, other._name);
 }
 Person::~Person(){
+	DebugLine("Person::~Person()");
 	if (_name)
 		delete[] _name;
 }
