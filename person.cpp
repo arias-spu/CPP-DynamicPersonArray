@@ -15,19 +15,20 @@ void DebugLine(const char* message){
 	cout << "- - - - - - - - - - " << message << endl;
 }
 
-Person::Person(const string& name, size_t age){
-	// Write the constructor
-	// Remember that you only have a char*
-	// Need to allocate enough space to hold the _name
-	// Need to copy the parameter to the data member
+Person::Person(const string& name, size_t age): _age(age){
+	DebugLine("Person::Person(const string& name, size_t age)");
+	_name = new char[name.length() + 1];
+	strcpy(_name, name.c_str());
 }
-Person::Person(const Person& other){
-	// Very much alike previous constructor, but
-	// need to copy from other
+Person::Person(const Person& other): _age(other._age){
+	DebugLine("Person::Person(const Person& other)");
+	_name = new char[strlen(other._name) + 1];
+	strcpy(_name, other._name);
 }
 Person::~Person(){
-	// Do we need this one?
-	// What do we need to do?
+	DebugLine("Person::~Person()");
+	if (_name)
+		delete[] _name;
 }
 string Person::ToString()const{
 	stringstream ss;
